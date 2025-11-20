@@ -10,6 +10,7 @@ const MOCK_PROTOCOLS: ProtocolData[] = [
         tvl: 1500000000,
         riskScore: 2,
         chain: 'Ethereum',
+        description: 'Leading decentralized lending protocol allowing users to lend, borrow, and earn interest on crypto assets.',
     },
     {
         id: 'yearn-finance',
@@ -19,6 +20,7 @@ const MOCK_PROTOCOLS: ProtocolData[] = [
         tvl: 400000000,
         riskScore: 4,
         chain: 'Ethereum',
+        description: 'Yield aggregator that optimizes DeFi returns by automatically moving funds between protocols.',
     },
     {
         id: 'uniswap-v3',
@@ -28,6 +30,7 @@ const MOCK_PROTOCOLS: ProtocolData[] = [
         tvl: 800000000,
         riskScore: 7,
         chain: 'Ethereum',
+        description: 'Largest decentralized exchange (DEX) utilizing concentrated liquidity for higher capital efficiency.',
     },
     {
         id: 'maker-dao',
@@ -37,6 +40,7 @@ const MOCK_PROTOCOLS: ProtocolData[] = [
         tvl: 5000000000,
         riskScore: 1,
         chain: 'Ethereum',
+        description: 'Decentralized organization managing the DAI stablecoin, backed by crypto collateral.',
     },
 ];
 

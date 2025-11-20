@@ -7,6 +7,7 @@ export interface ProtocolData {
     riskScore: number; // 0-10, lower is safer
     logoUrl?: string;
     chain: string;
+    description?: string;
 }
 
 export interface SimulationResult {
