@@ -8,7 +8,7 @@ import { calculateProjectedYield, formatCurrency } from '../utils/calculations';
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-card/90 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-xl">
+            <div className="bg-card/90 backdrop-blur-md border border-border/40 p-4 rounded-xl shadow-xl">
                 <p className="text-sm font-medium mb-2 text-muted-foreground">Month {label}</p>
                 <div className="space-y-1">
                     <p className="text-sm text-primary font-bold flex items-center">
@@ -62,13 +62,13 @@ export const Simulator: React.FC = () => {
             {/* Controls Panel */}
             <div className="lg:col-span-1 space-y-6">
                 <div>
-                    <h2 className="text-3xl font-bold tracking-tight mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+                    <h2 className="text-3xl font-bold tracking-tight mb-2 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60">
                         Simulator
                     </h2>
                     <p className="text-muted-foreground">Project your earnings over time.</p>
                 </div>
 
-                <div className="bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 space-y-8 shadow-lg">
+                <div className="bg-card/30 backdrop-blur-xl border border-border/40 rounded-2xl p-6 space-y-8 shadow-lg">
                     <div>
                         <label className="block text-sm font-medium mb-3 text-muted-foreground uppercase tracking-wider">Select Protocol</label>
                         <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
@@ -78,7 +78,7 @@ export const Simulator: React.FC = () => {
                                     onClick={() => setSelectedProtocolId(p.id)}
                                     className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all duration-200 ${selectedProtocolId === p.id
                                         ? 'border-primary/50 bg-primary/10 text-primary shadow-[0_0_15px_rgba(var(--primary),0.2)]'
-                                        : 'border-white/5 hover:bg-white/5 text-muted-foreground hover:text-foreground'
+                                        : 'border-border/40 hover:bg-muted/20 text-muted-foreground hover:text-foreground'
                                         }`}
                                 >
                                     <div className="flex items-center">
@@ -95,7 +95,7 @@ export const Simulator: React.FC = () => {
                         <div>
                             <label className="block text-sm font-medium mb-2 flex items-center justify-between">
                                 <span className="text-muted-foreground">Principal Amount</span>
-                                <span className="text-white font-bold text-lg">{formatCurrency(principal)}</span>
+                                <span className="text-foreground font-bold text-lg">{formatCurrency(principal)}</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
@@ -108,7 +108,7 @@ export const Simulator: React.FC = () => {
                                     step="100"
                                     value={principal}
                                     onChange={(e) => setPrincipal(Number(e.target.value))}
-                                    className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary mt-2"
+                                    className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary mt-2"
                                 />
                             </div>
                         </div>
@@ -116,7 +116,7 @@ export const Simulator: React.FC = () => {
                         <div>
                             <label className="block text-sm font-medium mb-2 flex items-center justify-between">
                                 <span className="text-muted-foreground">Duration</span>
-                                <span className="text-white font-bold text-lg">{duration} Months</span>
+                                <span className="text-foreground font-bold text-lg">{duration} Months</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
@@ -129,7 +129,7 @@ export const Simulator: React.FC = () => {
                                     step="1"
                                     value={duration}
                                     onChange={(e) => setDuration(Number(e.target.value))}
-                                    className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary mt-2"
+                                    className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary mt-2"
                                 />
                             </div>
                         </div>
@@ -141,7 +141,7 @@ export const Simulator: React.FC = () => {
                         <AlertTriangle size={20} className="text-yellow-500 mt-0.5 mr-3 flex-shrink-0" />
                         <div>
                             <h4 className="text-sm font-bold text-yellow-500 mb-1">Risk Assessment</h4>
-                            <p className="text-xs text-yellow-200/70 leading-relaxed">
+                            <p className="text-xs text-yellow-500/70 leading-relaxed">
                                 {selectedProtocol.name} has a risk score of {selectedProtocol.riskScore}/10.
                                 {selectedProtocol.riskScore > 5
                                     ? ' Higher returns come with higher volatility.'
@@ -155,17 +155,17 @@ export const Simulator: React.FC = () => {
             {/* Chart Panel */}
             <div className="lg:col-span-2 space-y-6">
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-card/30 backdrop-blur-xl border border-white/10 p-6 rounded-2xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <div className="bg-card/30 backdrop-blur-xl border border-border/40 p-6 rounded-2xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity text-foreground">
                             <DollarSign size={64} />
                         </div>
                         <p className="text-sm text-muted-foreground mb-1 font-medium uppercase tracking-wider">Projected Balance</p>
-                        <p className="text-4xl font-bold text-white tracking-tight">
+                        <p className="text-4xl font-bold text-foreground tracking-tight">
                             {formatCurrency(principal + totalYield)}
                         </p>
                     </div>
-                    <div className="bg-card/30 backdrop-blur-xl border border-white/10 p-6 rounded-2xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <div className="bg-card/30 backdrop-blur-xl border border-border/40 p-6 rounded-2xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity text-foreground">
                             <TrendingUp size={64} />
                         </div>
                         <p className="text-sm text-muted-foreground mb-1 font-medium uppercase tracking-wider">Total Yield Earned</p>
@@ -175,8 +175,8 @@ export const Simulator: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 h-[500px] flex flex-col">
-                    <h3 className="text-lg font-semibold mb-6 flex items-center">
+                <div className="bg-card/30 backdrop-blur-xl border border-border/40 rounded-2xl p-6 h-[500px] flex flex-col">
+                    <h3 className="text-lg font-semibold mb-6 flex items-center text-foreground">
                         <TrendingUp size={18} className="mr-2 text-primary" />
                         Growth Projection
                     </h3>
@@ -194,10 +194,10 @@ export const Simulator: React.FC = () => {
                                         <stop offset="95%" stopColor="#4ade80" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" vertical={false} />
                                 <XAxis
                                     dataKey="month"
-                                    stroke="rgba(255,255,255,0.3)"
+                                    stroke="hsl(var(--muted-foreground))"
                                     tickLine={false}
                                     axisLine={false}
                                     tickFormatter={(value) => `M${value}`}
@@ -205,13 +205,13 @@ export const Simulator: React.FC = () => {
                                     dy={10}
                                 />
                                 <YAxis
-                                    stroke="rgba(255,255,255,0.3)"
+                                    stroke="hsl(var(--muted-foreground))"
                                     tickLine={false}
                                     axisLine={false}
                                     tickFormatter={(value) => `$${value / 1000}k`}
                                     tick={{ fontSize: 12 }}
                                 />
-                                <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(255,255,255,0.1)', strokeWidth: 2 }} />
+                                <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'hsl(var(--muted))', strokeWidth: 2 }} />
                                 <Area
                                     type="monotone"
                                     dataKey="value"

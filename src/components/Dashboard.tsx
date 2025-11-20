@@ -21,9 +21,9 @@ const StatCard = ({
 }) => (
     <motion.div
         whileHover={{ y: -5 }}
-        className="bg-card/50 backdrop-blur-sm border border-white/10 p-6 rounded-xl shadow-lg relative overflow-hidden group"
+        className="bg-card/50 backdrop-blur-sm border border-border/40 p-6 rounded-xl shadow-lg relative overflow-hidden group"
     >
-        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+        <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity text-foreground">
             <Icon size={80} />
         </div>
         <div className="relative z-10">
@@ -55,16 +55,16 @@ const ProtocolRow = ({ protocol, index }: { protocol: ProtocolData, index: numbe
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer ${expanded ? 'bg-white/5' : ''}`}
+                className={`border-b border-border/40 hover:bg-muted/20 transition-colors cursor-pointer ${expanded ? 'bg-muted/20' : ''}`}
                 onClick={() => setExpanded(!expanded)}
             >
                 <td className="py-4 px-4">
                     <div className="flex items-center">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-800 to-black border border-white/10 mr-4 flex items-center justify-center text-sm font-bold shadow-lg">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-muted to-muted/50 border border-border/40 mr-4 flex items-center justify-center text-sm font-bold shadow-lg text-foreground">
                             {protocol.symbol.substring(0, 1)}
                         </div>
                         <div>
-                            <p className="font-bold text-base">{protocol.name}</p>
+                            <p className="font-bold text-base text-foreground">{protocol.name}</p>
                             <p className="text-xs text-muted-foreground">{protocol.chain}</p>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ const ProtocolRow = ({ protocol, index }: { protocol: ProtocolData, index: numbe
                         <TrendingUp size={16} className="ml-1 opacity-50" />
                     </div>
                 </td>
-                <td className="py-4 px-4 font-medium text-lg">
+                <td className="py-4 px-4 font-medium text-lg text-foreground">
                     {formatCurrency(protocol.tvl)}
                 </td>
                 <td className="py-4 px-4 text-right">
@@ -89,7 +89,7 @@ const ProtocolRow = ({ protocol, index }: { protocol: ProtocolData, index: numbe
             <AnimatePresence>
                 {expanded && (
                     <tr>
-                        <td colSpan={4} className="p-0 border-b border-white/5 bg-black/20">
+                        <td colSpan={4} className="p-0 border-b border-border/40 bg-muted/10">
                             <motion.div
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: 'auto', opacity: 1 }}
@@ -99,7 +99,7 @@ const ProtocolRow = ({ protocol, index }: { protocol: ProtocolData, index: numbe
                                 <div className="p-6 space-y-6">
                                     <div className="flex items-start p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
                                         <Info size={20} className="text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
-                                        <p className="text-sm text-blue-200/80 leading-relaxed">
+                                        <p className="text-sm text-blue-400/80 leading-relaxed">
                                             {protocol.description}
                                         </p>
                                     </div>
@@ -149,7 +149,7 @@ export const Dashboard: React.FC = () => {
         <div className="space-y-8 pb-10">
             <div className="flex flex-col md:flex-row justify-between items-end mb-8">
                 <div>
-                    <h2 className="text-4xl font-bold tracking-tight mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
+                    <h2 className="text-4xl font-bold tracking-tight mb-2 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60">
                         Market Overview
                     </h2>
                     <p className="text-muted-foreground text-lg">Real-time insights across top DeFi protocols.</p>
@@ -183,16 +183,16 @@ export const Dashboard: React.FC = () => {
                 />
             </div>
 
-            <div className="bg-card/30 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-                <div className="p-6 border-b border-white/5 flex justify-between items-center">
-                    <h3 className="text-xl font-semibold">Top Yield Opportunities</h3>
+            <div className="bg-card/30 backdrop-blur-xl border border-border/40 rounded-2xl overflow-hidden shadow-2xl">
+                <div className="p-6 border-b border-border/40 flex justify-between items-center">
+                    <h3 className="text-xl font-semibold text-foreground">Top Yield Opportunities</h3>
                     <button className="text-sm text-primary hover:text-primary/80 transition-colors">
                         View All
                     </button>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-black/20 text-muted-foreground uppercase tracking-wider text-xs">
+                        <thead className="bg-muted/20 text-muted-foreground uppercase tracking-wider text-xs">
                             <tr>
                                 <th className="py-4 px-4 font-semibold">Protocol</th>
                                 <th className="py-4 px-4 font-semibold">APY</th>

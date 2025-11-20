@@ -52,13 +52,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
             </div>
 
             {/* Sidebar */}
-            <aside className="w-72 border-r border-white/5 bg-black/40 backdrop-blur-2xl p-6 flex flex-col z-20 relative">
+            <aside className="w-72 border-r border-border/40 bg-background/80 backdrop-blur-2xl p-6 flex flex-col z-20 relative">
                 <div className="flex items-center mb-12 px-2">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-purple-600 mr-4 flex items-center justify-center shadow-lg shadow-primary/20 ring-1 ring-white/10">
                         <Activity size={22} className="text-white" />
                     </div>
                     <div>
-                        <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 tracking-tight">
+                        <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60 tracking-tight">
                             YieldSim
                         </h1>
                         <p className="text-xs text-primary font-medium tracking-wider uppercase opacity-80">Pro Analytics</p>
@@ -103,16 +103,16 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
                     </div>
                 </nav>
 
-                <div className="mt-auto pt-6 border-t border-white/5">
+                <div className="mt-auto pt-6 border-t border-border/40">
                     <button
                         onClick={() => onTabChange('settings')}
-                        className="flex items-center w-full p-3 rounded-xl bg-gradient-to-r from-white/5 to-transparent border border-white/5 hover:border-white/10 transition-colors cursor-pointer group"
+                        className="flex items-center w-full p-3 rounded-xl bg-gradient-to-r from-muted/50 to-transparent border border-border/40 hover:border-border/60 transition-colors cursor-pointer group"
                     >
                         <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-teal-400 mr-3 shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center">
                             <Settings size={20} className="text-white" />
                         </div>
                         <div className="text-left">
-                            <p className="text-sm font-bold text-white group-hover:text-primary transition-colors">Settings</p>
+                            <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">Settings</p>
                             <p className="text-xs text-muted-foreground">App Preferences</p>
                         </div>
                     </button>
