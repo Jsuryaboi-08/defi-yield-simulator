@@ -1,146 +1,72 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# Project Explanation: DeFi Yield Simulator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This document provides a technical overview of the DeFi Yield Simulator project, explaining the technology stack, project structure, and the logic behind the yield calculations.
 
-## Available Scripts
+## 1. Tech Stack
 
-In the project directory, you can run:
+The project is a Single Page Application (SPA) built with modern web technologies:
 
-### `npm start`
+*   **Frontend Framework**: [React](https://react.dev/) (v19) - Used for building the user interface and managing application state.
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/) (v4) - A utility-first CSS framework for rapid UI development.
+*   **Icons**: [Lucide React](https://lucide.dev/) - A library of beautiful, consistent icons.
+*   **Charting**: [Recharts](https://recharts.org/) - A composable charting library built on React components, used for the growth projection graph.
+*   **Data Fetching**: Native browser `fetch` API - Used to retrieve live cryptocurrency prices.
+*   **Testing**: [Jest](https://jestjs.io/) & [React Testing Library](https://testing-library.com/) - For unit and component testing.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 2. Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+*   **`src/App.js`**: This is the core file containing the entire application logic. It handles:
+    *   State management (investment amount, timeframe, selected protocol, etc.).
+    *   Yield calculations.
+    *   API calls to CoinGecko.
+    *   UI rendering (Controls, Charts, Summary).
+*   **`src/index.js`**: The entry point that renders the `App` component into the DOM.
+*   **`public/`**: Contains static assets like `index.html` and the manifest.
+*   **`Streamlit Deployment/`**: An existing directory structure that is currently empty/unused in the React application context.
 
-### `npm test`
+## 3. How It Works
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Application Flow
+1.  **Initialization**: When the app loads, it initializes state with default values (Uniswap, $10,000 investment, 12 months).
+2.  **Data Fetching**: A `useEffect` hook triggers `fetchPrices()` to get real-time Ethereum (ETH) and DAI prices from the CoinGecko API.
+3.  **User Interaction**: Users can adjust:
+    *   **Protocol**: Selects a DeFi protocol (Uniswap, Aave, MakerDAO, Yearn).
+    *   **Investment**: Slider to set initial principal ($100 - $100,000).
+    *   **Timeframe**: Slider to set duration (1 - 60 months).
+    *   **Compounding**: Dropdown to select frequency (Daily, Weekly, Monthly, Yearly).
+4.  **Real-time Calculation**: Any change in inputs triggers the `calculateYield()` function via a `useEffect` hook, updating the chart and summary statistics immediately.
 
-### `npm run build`
+### Calculation Logic
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The simulator uses the **Compound Interest Formula** to project future value.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Formula**:
+$$A = P \left(1 + \frac{r}{n}\right)^{nt}$$
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Where**:
+*   $A$ = Future Value (`currentValue`)
+*   $P$ = Principal Investment (`investment`)
+*   $r$ = Annual Interest Rate (APY) (`apy`)
+*   $n$ = Number of times interest applied per time period (`compoundFrequency`)
+*   $t$ = Number of time periods elapsed (`periodsElapsed` in years)
 
-### `npm run eject`
+**Implementation Details**:
+*   **APY Rates**: Hardcoded base rates for demonstration:
+    *   Uniswap: 15%
+    *   Yearn: 8%
+    *   MakerDAO: 5%
+    *   Aave: 3.5%
+*   **Compounding Frequencies**:
+    *   Daily: $n = 365$
+    *   Weekly: $n = 52$
+    *   Monthly: $n = 12$
+    *   Yearly: $n = 1$
+*   **Projection Loop**: The code iterates through each month from 0 to `timeframe`. For each month:
+    1.  Calculates `periodsElapsed` in years: `(month / 12) * compoundFrequency`.
+    2.  Applies the compound interest formula.
+    3.  Stores the result for the chart data.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# React + TypeScript + Vite
-
-This provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
->>>>>>> 0e08febd31faba03d3f3b1614fba1567a4a3626b
+### API Integration
+*   **Endpoint**: `https://api.coingecko.com/api/v3/simple/price`
+*   **Parameters**: `ids=ethereum,dai` & `vs_currencies=usd`
+*   **Usage**: Displays the current market price of ETH and DAI to provide context, though these prices do not directly affect the yield simulation math in this version.
